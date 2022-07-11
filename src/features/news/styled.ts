@@ -19,7 +19,7 @@ export const TituloNoticias = styled.h2`
   text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000,
     -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000,
     -2px 0px 0 #000000, 0px -2px 0 #000000;
-
+    font-display: swap;
   letter-spacing: 0.1rem;
 `;
 
@@ -47,7 +47,7 @@ export const TarjetaNoticia = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   position: relative;
-
+  font-display: swap;
   &:hover {
     box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
     cursor: pointer;
@@ -68,6 +68,7 @@ export const TituloTarjetaNoticia = styled.h3`
   margin: 1rem auto;
   padding: 0 1rem;
   height: 3.5rem;
+  font-display: swap;
 `;
 
 export const DescripcionTarjetaNoticia = styled.p`
@@ -83,6 +84,7 @@ export const FechaTarjetaNoticia = styled.p`
   margin: 0.3rem auto;
   width: 90%;
   text-align: right;
+  font-display: swap;
 `;
 
 export const BotonLectura = styled.button`

@@ -33,11 +33,11 @@ const ModalComponent: React.FC<Imodal> = ({img, title, desc, setModal, esPremium
           <CloseButton onClick={() => setModal(null)}>
             <img src={Close} alt="close-button" />
           </CloseButton>
-          <ImagenModal src={esPremium ? img: SuscribeImage} alt={esPremium? "news-image":"mr-burns-excelent" } />
+          <ImagenModal src={esPremium ? SuscribeImage:img } alt={esPremium? "mr-burns-excelent":"news-image" } />
           <CotenedorTexto>
-            <TituloModal>{esPremium?title:suscriptionTitle}</TituloModal>
-            <DescripcionModal> {esPremium?desc:suscriptionDescription}</DescripcionModal>
-              {esPremium&&<SusButton setModal={setModal}/>}
+            <TituloModal>{esPremium?suscriptionTitle: title}</TituloModal>
+            <DescripcionModal> {esPremium?suscriptionDescription:desc}</DescripcionModal>
+              {esPremium?(<SusButton setModal={setModal}/>):null}
            </CotenedorTexto>
         </TarjetaModal>
       </ContenedorModal>

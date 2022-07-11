@@ -66,8 +66,8 @@ const Noticias = () => {
       <TituloNoticias>Noticias de los Simpsons</TituloNoticias>
       <ListaNoticias>
         {noticias.map((n) => (
-          <TarjetaNoticia>
-            <ImagenTarjetaNoticia src={n.imagen} />
+          <TarjetaNoticia key={n.id}>
+            <ImagenTarjetaNoticia src={n.imagen} alt={n.titulo}/>
             <TituloTarjetaNoticia>{n.titulo}</TituloTarjetaNoticia>
             <FechaTarjetaNoticia>{n.fecha}</FechaTarjetaNoticia>
             <DescripcionTarjetaNoticia>

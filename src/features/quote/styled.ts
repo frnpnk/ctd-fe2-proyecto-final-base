@@ -42,6 +42,7 @@ export const Input = styled.input`
   font-size: 1.5rem;
   margin: 1rem auto;
   font-family: "Homer Simpson Revised", sans-serif;
+  font-display: swap;
 `;
 
 export const Boton = styled.button<{ secondary?: boolean }>`
@@ -55,6 +56,7 @@ export const Boton = styled.button<{ secondary?: boolean }>`
   margin: 1rem auto;
   font-family: "Homer Simpson Revised", sans-serif;
   font-size: 1.5rem;
+  font-display: swap;
 
   &:hover {
     cursor: pointer;
