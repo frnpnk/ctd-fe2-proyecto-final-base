@@ -3,5 +3,18 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
-import { configure } from "@testing-library/react";
-configure({ asyncUtilTimeout: 4000 });
+import { server } from './test/mocks/server';
+//configure({ asyncUtilTimeout: 4000 });
+
+beforeAll(() => {
+    server.listen()
+  })
+  afterAll(() => {
+      server.close()
+  })
+  afterEach(()=>{
+    server.resetHandlers()
+  })
+
+
+  

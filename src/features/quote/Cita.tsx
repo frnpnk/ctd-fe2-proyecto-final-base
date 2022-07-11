@@ -27,22 +27,21 @@ function Cita() {
 
   return (
     <ContenedorCita>
-      <TextoCita data-testId="uiCita">{obtenerMensaje(cita, estadoPedido)}</TextoCita>
-      <AutorCita data-testId="autor" >{personaje}</AutorCita>
+      <TextoCita >{obtenerMensaje(cita, estadoPedido)}</TextoCita>
+      <AutorCita >{personaje}</AutorCita>
       <Input
-        data-testId="char"
         aria-label="Author Cita"
         value={valorInput}
         onChange={(e) => setValorInput(e.target.value)}
         placeholder="Ingresa el nombre del autor"
       />
       <Boton
-        data-testId="getButton" aria-label={valorInput ? "Obtener Cita" : "Obtener cita aleatoria"}
+        aria-label={valorInput ? "Obtener Cita" : "Obtener cita aleatoria"}
         onClick={onClickObtenerCita}
       >
         {valorInput ? "Obtener Cita" : "Obtener cita aleatoria"}
       </Boton>
-      <Boton data-testId="cleanButton" aria-label="Borrar" onClick={onClickBorrar} secondary={true}>
+      <Boton aria-label="Borrar" onClick={onClickBorrar} secondary={true}>
         Borrar
       </Boton>
     </ContenedorCita>

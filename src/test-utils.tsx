@@ -3,8 +3,8 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import citaReducer from "../features/quote/citaSlice";
-import { RootState } from "../app/store";
+import citaReducer from "./features/quote/citaSlice";
+import { RootState } from "./app/store";
 
 // Creamos el custom render
 const customRender = (
@@ -37,4 +37,4 @@ const customRender = (
 export * from "@testing-library/react";
 
 // sobrescribimos el método render.
-export { customRender as render };
+export { customRender as crender };

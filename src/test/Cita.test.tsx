@@ -1,6 +1,6 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, act } from "@testing-library/react";
 import Cita from "../features/quote/Cita"
-import { render } from "./test-utils"
+import { crender } from "../test-utils"
 import userEvent from '@testing-library/user-event'
 
 
@@ -10,57 +10,62 @@ describe("Cita", ()=>{
 
     describe("default", ()=>{
         it( "should render 'no hay cita' message", ()=>{
-        render(<Cita/>)
-          const noHayCita = screen.getByText("No se encontro ninguna cita")
-        expect(noHayCita).toBeInTheDocument(  )
+        crender(<Cita/>)
+        expect(screen.getByText("No se encontro ninguna cita")).toBeInTheDocument()
         })
 
     })
 
     describe("some good input", ()=>{
-        it( "should render a new qoute and 'obtener cita' button legend", async()=>{
-            render(<Cita/>)
+        it( "should render a new qoute from 'marge' input", async()=>{
+            crender(<Cita/>)
             const inputChar = screen.getByPlaceholderText("Ingresa el nombre del autor")
-            const getQuote = screen.getByTestId("getButton")
-            fireEvent.change(inputChar, {target: {value:"homer"}})
-            userEvent.click(getQuote)
-            expect( await screen.findByText("Homer Simpson")).toBeInTheDocument()
+            const getQuote = screen.getByLabelText("Obtener cita aleatoria")
+            act(() => {
+                fireEvent.change(inputChar, {target: {value:"marge"}})
+                userEvent.click(getQuote)
+                /* fire events that update state */
+            });
+            expect( await screen.findByText("Marge Simpson")).toBeInTheDocument()
            
         })
 
     })
 
     describe("some invalid input", ()=>{
-        it( "should render a invalid character message and 'obtener cita' button legend", async()=>{
-            render(<Cita/>)
+        it( "should render a invalid character message", async()=>{
+            crender(<Cita/>)
             const inputChar = screen.getByPlaceholderText("Ingresa el nombre del autor")
-            const getQuote = screen.getByTestId("getButton")
-            fireEvent.change(inputChar, {target: {value:"ramon"}})
-            userEvent.click(getQuote)
+            const getQuote = screen.getByLabelText("Obtener cita aleatoria")
+            act(() => {
+                fireEvent.change(inputChar, {target: {value:"ramon"}})
+                userEvent.click(getQuote)
+                /* fire events that update state */
+               });
             expect( await screen.findByText("Por favor ingrese un nombre válido")).toBeInTheDocument()
         })
 
     })
 
     describe("random quote", ()=>{
-        it( "should render a random quote, clean input and random quote button legend", async ()=>{
-            render(<Cita/>)
-            const getQuote = screen.getByTestId("getButton")
+        it( "should render a random quote", async ()=>{
+            crender(<Cita/>)
+            const getQuote = screen.getByLabelText("Obtener cita aleatoria")
             userEvent.click(getQuote)
-            expect( await screen.getByTestId("autor")).any("")
+            expect( await screen.findByText("Mayor Quimby")).toBeInTheDocument()
         })
 
     })
 
     describe("clean", ()=>{
-        it( "should render 'no hay cita' message, clean input and random quote button legend", async ()=>{
-            render(<Cita/>)
-            const getQuote = screen.getByTestId("getButton")
-            const clean = screen.getByTestId("cleanButton")
+        it( "should render 'no hay cita' message after clean button press", async ()=>{
+            crender(<Cita/>)
+            const getQuote = screen.getByLabelText("Obtener cita aleatoria")
+            const clean = screen.getByLabelText("Borrar")
             userEvent.click(getQuote)
-            expect( await screen.getByTestId("autor")).toBeGreaterThan(1)
+            expect( await screen.findByText("Mayor Quimby")).toBeInTheDocument()
             userEvent.click(clean)
-            expect(await screen.getByText("No se encontro ninguna cita")).toBeInTheDocument()
+            expect(await screen.findByText("No se encontro ninguna cita")).toBeInTheDocument()
 
         })
 
