@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
-import { SuscribeImage, CloseButton as Close } from "../../assets";
 import { obtenerNoticias } from "./fakeRest";
 import {
-  CloseButton,
-  TarjetaModal,
-  ContenedorModal,
-  DescripcionModal,
-  ImagenModal,
-  TituloModal,
   TarjetaNoticia,
   FechaTarjetaNoticia,
   DescripcionTarjetaNoticia,
@@ -17,9 +10,8 @@ import {
   ListaNoticias,
   TituloNoticias,
   BotonLectura,
-  BotonSuscribir,
-  CotenedorTexto,
 } from "./styled";
+import ModalComponent from "./modalComponent";
 
 export interface INoticiasNormalizadas {
   id: number;
@@ -84,48 +76,7 @@ const Noticias = () => {
             <BotonLectura onClick={() => setModal(n)}>Ver más</BotonLectura>
           </TarjetaNoticia>
         ))}
-        {modal ? (
-          modal.esPremium ? (
-            <ContenedorModal>
-              <TarjetaModal>
-                <CloseButton onClick={() => setModal(null)}>
-                  <img src={Close} alt="close-button" />
-                </CloseButton>
-                <ImagenModal src={SuscribeImage} alt="mr-burns-excelent" />
-                <CotenedorTexto>
-                  <TituloModal>Suscríbete a nuestro Newsletter</TituloModal>
-                  <DescripcionModal>
-                    Suscríbete a nuestro newsletter y recibe noticias de
-                    nuestros personajes favoritos.
-                  </DescripcionModal>
-                  <BotonSuscribir
-                    onClick={() =>
-                      setTimeout(() => {
-                        alert("Suscripto!");
-                        setModal(null);
-                      }, 1000)
-                    }
-                  >
-                    Suscríbete
-                  </BotonSuscribir>
-                </CotenedorTexto>
-              </TarjetaModal>
-            </ContenedorModal>
-          ) : (
-            <ContenedorModal>
-              <TarjetaModal>
-                <CloseButton onClick={() => setModal(null)}>
-                  <img src={Close} alt="close-button" />
-                </CloseButton>
-                <ImagenModal src={modal.imagen} alt="news-image" />
-                <CotenedorTexto>
-                  <TituloModal>{modal.titulo}</TituloModal>
-                  <DescripcionModal>{modal.descripcion}</DescripcionModal>
-                </CotenedorTexto>
-              </TarjetaModal>
-            </ContenedorModal>
-          )
-        ) : null}
+        {modal ? <ModalComponent img={modal.imagen} title={modal.titulo} desc={modal.descripcion} setModal={setModal} esPremium={modal.esPremium}/>:null}
       </ListaNoticias>
     </ContenedorNoticias>
   );
